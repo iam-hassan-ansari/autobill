@@ -1,8 +1,8 @@
 /* =========================================================
-   AutoBill — Vehicle Showroom Billing (Demo)
+   AutoBill - Vehicle Showroom Billing (Demo)
    Plain vanilla JS. All data lives in the browser (localStorage).
    This recreates the KIND of billing software built at a real
-   dealership job, using fictional vehicles — no real company
+   dealership job, using fictional vehicles - no real company
    data or code is used here.
    ========================================================= */
 
@@ -25,7 +25,7 @@ function nextId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 }
 function money(n) {
-  return "₹" + Number(n).toLocaleString("en-IN", { maximumFractionDigits: 2 });
+  return "INR " + Number(n).toLocaleString("en-IN", { maximumFractionDigits: 2 });
 }
 
 /* ---------- seed sample data (fictional vehicles) ---------- */
@@ -98,7 +98,7 @@ function renderStock() {
   const sel = document.getElementById("inv-vehicle");
   sel.innerHTML = stock
     .filter((v) => v.qty > 0)
-    .map((v) => `<option value="${v.id}">${v.model} ${v.variant} — ${money(v.price)} (${v.qty} left)</option>`)
+    .map((v) => `<option value="${v.id}">${v.model} ${v.variant} - ${money(v.price)} (${v.qty} left)</option>`)
     .join("");
 }
 
@@ -138,7 +138,7 @@ function renderCustomers() {
   });
   const sel = document.getElementById("inv-customer");
   sel.innerHTML =
-    `<option value="">— Select customer —</option>` +
+    `<option value=""> -  Select customer  - </option>` +
     customers.map((c) => `<option value="${c.id}">${c.name} (${c.phone})</option>`).join("");
 }
 
@@ -192,7 +192,7 @@ function renderInvoiceLines() {
     const tr = document.createElement("tr");
     tr.innerHTML = `<td>${line.model}</td><td>${line.qty}</td><td>${money(line.price)}</td>
       <td>${line.gst}%</td><td>${money(lineBase + lineGst)}</td>
-      <td><button class="danger" data-idx="${idx}" data-action="del-line">✕</button></td>`;
+      <td><button class="danger" data-idx="${idx}" data-action="del-line">X</button></td>`;
     tbody.appendChild(tr);
   });
 
@@ -272,15 +272,15 @@ document.getElementById("btn-generate-invoice").addEventListener("click", () => 
 });
 
 /* =========================================================
-   PRINT / PDF (uses the browser's own print → save as PDF)
+   PRINT / PDF (uses the browser's own print -> save as PDF)
    ========================================================= */
 function printInvoice(invoice) {
   const rows = invoice.lines
-    .map((l) => `<tr><td>${l.model}</td><td>${l.qty}</td><td>₹${l.price}</td><td>${l.gst}%</td><td>₹${(l.price * l.qty * (1 + l.gst / 100)).toFixed(2)}</td></tr>`)
+    .map((l) => `<tr><td>${l.model}</td><td>${l.qty}</td><td>INR ${l.price}</td><td>${l.gst}%</td><td>INR ${(l.price * l.qty * (1 + l.gst / 100)).toFixed(2)}</td></tr>`)
     .join("");
 
   document.getElementById("print-invoice").innerHTML = `
-    <h2>AutoBill — Tax Invoice (Demo)</h2>
+    <h2>AutoBill - Tax Invoice (Demo)</h2>
     <p><strong>Invoice No:</strong> ${invoice.invoiceNo} &nbsp; <strong>Date:</strong> ${invoice.date}</p>
     <p><strong>Customer:</strong> ${invoice.customerName} (${invoice.customerPhone})</p>
     <table>
@@ -288,10 +288,10 @@ function printInvoice(invoice) {
       <tbody>${rows}</tbody>
     </table>
     <p style="margin-top:14px;">
-      Subtotal: ₹${invoice.subtotal.toFixed(2)}<br/>
-      GST: ₹${invoice.gst.toFixed(2)}<br/>
-      Discount: ₹${invoice.discount}<br/>
-      <strong>Grand Total: ₹${invoice.total.toFixed(2)}</strong>
+      Subtotal: INR ${invoice.subtotal.toFixed(2)}<br/>
+      GST: INR ${invoice.gst.toFixed(2)}<br/>
+      Discount: INR ${invoice.discount}<br/>
+      <strong>Grand Total: INR ${invoice.total.toFixed(2)}</strong>
     </p>
     <p style="margin-top:24px;font-size:12px;color:#555;">
       This is a demo invoice generated for portfolio purposes only.

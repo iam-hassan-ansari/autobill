@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AutoBill — Vehicle Showroom Billing (Demo)</title>
+<title>AutoBill - Vehicle Showroom Billing (Demo)</title>
 <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <div class="topbar no-print">
-    <div class="brand">🚗 AutoBill <span class="badge">DEMO</span></div>
+    <div class="brand">AutoBill <span class="badge">DEMO</span></div>
     <nav class="tabs">
       <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
       <button class="tab-btn" data-tab="invoice">New Invoice</button>
@@ -27,7 +27,7 @@
         <div class="card stat"><div class="stat-label">Vehicles in Stock</div><div class="stat-value" id="stat-stock">0</div></div>
         <div class="card stat"><div class="stat-label">Customers</div><div class="stat-value" id="stat-customers">0</div></div>
         <div class="card stat"><div class="stat-label">Invoices Raised</div><div class="stat-value" id="stat-invoices">0</div></div>
-        <div class="card stat"><div class="stat-label">Total Revenue</div><div class="stat-value" id="stat-revenue">₹0</div></div>
+        <div class="card stat"><div class="stat-label">Total Revenue</div><div class="stat-value" id="stat-revenue">INR 0</div></div>
       </div>
       <div class="card" style="margin-top:18px;">
         <h3>Recent Invoices</h3>
@@ -35,7 +35,7 @@
           <thead><tr><th>Invoice #</th><th>Date</th><th>Customer</th><th>Total</th></tr></thead>
           <tbody></tbody>
         </table>
-        <p class="muted" id="recent-empty" style="display:none;">No invoices yet — create one from the "New Invoice" tab.</p>
+        <p class="muted" id="recent-empty" style="display:none;">No invoices yet - create one from the "New Invoice" tab.</p>
       </div>
     </section>
 
@@ -62,12 +62,12 @@
         </table>
 
         <div class="invoice-totals">
-          <div class="form-row"><label>Discount (₹)</label><input type="number" id="inv-discount" value="0" min="0" style="width:120px;" /></div>
+          <div class="form-row"><label>Discount (INR)</label><input type="number" id="inv-discount" value="0" min="0" style="width:120px;" /></div>
           <div class="totals-box">
-            <div><span>Subtotal</span><span id="inv-subtotal">₹0</span></div>
-            <div><span>GST</span><span id="inv-gst">₹0</span></div>
-            <div><span>Discount</span><span id="inv-discount-amt">₹0</span></div>
-            <div class="grand"><span>Grand Total</span><span id="inv-total">₹0</span></div>
+            <div><span>Subtotal</span><span id="inv-subtotal">INR 0</span></div>
+            <div><span>GST</span><span id="inv-gst">INR 0</span></div>
+            <div><span>Discount</span><span id="inv-discount-amt">INR 0</span></div>
+            <div class="grand"><span>Grand Total</span><span id="inv-total">INR 0</span></div>
           </div>
         </div>
 
@@ -84,7 +84,7 @@
           <input type="text" id="stock-model" placeholder="Model (e.g. Zephyr 125)" />
           <input type="text" id="stock-variant" placeholder="Variant" />
           <input type="text" id="stock-color" placeholder="Color" />
-          <input type="number" id="stock-price" placeholder="Price ₹" />
+          <input type="number" id="stock-price" placeholder="Price INR " />
           <input type="number" id="stock-gst" placeholder="GST %" value="28" />
           <input type="number" id="stock-qty" placeholder="Qty" value="5" />
           <button id="btn-add-stock">Add Vehicle</button>
@@ -127,7 +127,7 @@
           <thead><tr><th>Invoice #</th><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th></th></tr></thead>
           <tbody></tbody>
         </table>
-        <p><strong>Total Revenue (filtered): <span id="report-total">₹0</span></strong></p>
+        <p><strong>Total Revenue (filtered): <span id="report-total">INR 0</span></strong></p>
       </div>
     </section>
 
@@ -137,7 +137,7 @@
   <div id="print-invoice" class="print-only"></div>
 
   <div class="app-footer no-print">
-    Demo project by <strong>Hassan Ansari</strong> ·
+    Demo project by <strong>Hassan Ansari</strong> -
     <a href="https://github.com/iam-hassan-ansari" target="_blank" rel="noopener">GitHub</a>
   </div>
 

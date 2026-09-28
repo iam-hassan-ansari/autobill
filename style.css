@@ -1,4 +1,4 @@
-/* ===== Shared dark theme — reused across all Hassan Ansari demo projects ===== */
+/* ===== Shared dark theme - reused across all Hassan Ansari demo projects ===== */
 :root {
   --bg: #0b1220;
   --surface: #121a2b;
@@ -126,7 +126,7 @@ th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size
 
 .muted { color: var(--muted); font-size: 13px; }
 
-/* Printable invoice — hidden on screen, shown only when printing an invoice */
+/* Printable invoice - hidden on screen, shown only when printing an invoice */
 .print-only { display: none; }
 @media print {
   body.printing-invoice > *:not(#print-invoice) { display: none !important; }
