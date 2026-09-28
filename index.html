@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AutoBill — Vehicle Showroom Billing (Demo)</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="topbar no-print">
+    <div class="brand">🚗 AutoBill <span class="badge">DEMO</span></div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+      <button class="tab-btn" data-tab="invoice">New Invoice</button>
+      <button class="tab-btn" data-tab="stock">Stock</button>
+      <button class="tab-btn" data-tab="customers">Customers</button>
+      <button class="tab-btn" data-tab="report">Sales Report</button>
+    </nav>
+  </div>
+
+  <div class="container">
+
+    <!-- DASHBOARD -->
+    <section id="tab-dashboard" class="tab-panel">
+      <div class="stat-grid">
+        <div class="card stat"><div class="stat-label">Vehicles in Stock</div><div class="stat-value" id="stat-stock">0</div></div>
+        <div class="card stat"><div class="stat-label">Customers</div><div class="stat-value" id="stat-customers">0</div></div>
+        <div class="card stat"><div class="stat-label">Invoices Raised</div><div class="stat-value" id="stat-invoices">0</div></div>
+        <div class="card stat"><div class="stat-label">Total Revenue</div><div class="stat-value" id="stat-revenue">₹0</div></div>
+      </div>
+      <div class="card" style="margin-top:18px;">
+        <h3>Recent Invoices</h3>
+        <table id="recent-invoices-table">
+          <thead><tr><th>Invoice #</th><th>Date</th><th>Customer</th><th>Total</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p class="muted" id="recent-empty" style="display:none;">No invoices yet — create one from the "New Invoice" tab.</p>
+      </div>
+    </section>
+
+    <!-- NEW INVOICE -->
+    <section id="tab-invoice" class="tab-panel" style="display:none;">
+      <div class="card">
+        <h3>Create Invoice</h3>
+        <div class="form-row">
+          <label>Customer</label>
+          <select id="inv-customer"></select>
+          <button class="secondary" id="btn-quick-customer" type="button">+ New Customer</button>
+        </div>
+
+        <h4>Add Vehicle</h4>
+        <div class="form-row">
+          <select id="inv-vehicle"></select>
+          <input type="number" id="inv-qty" value="1" min="1" style="width:80px;" />
+          <button id="btn-add-line" type="button">Add to Invoice</button>
+        </div>
+
+        <table id="invoice-lines-table">
+          <thead><tr><th>Vehicle</th><th>Qty</th><th>Price</th><th>GST</th><th>Line Total</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+
+        <div class="invoice-totals">
+          <div class="form-row"><label>Discount (₹)</label><input type="number" id="inv-discount" value="0" min="0" style="width:120px;" /></div>
+          <div class="totals-box">
+            <div><span>Subtotal</span><span id="inv-subtotal">₹0</span></div>
+            <div><span>GST</span><span id="inv-gst">₹0</span></div>
+            <div><span>Discount</span><span id="inv-discount-amt">₹0</span></div>
+            <div class="grand"><span>Grand Total</span><span id="inv-total">₹0</span></div>
+          </div>
+        </div>
+
+        <button id="btn-generate-invoice">Generate Invoice</button>
+        <p class="muted" id="invoice-msg"></p>
+      </div>
+    </section>
+
+    <!-- STOCK -->
+    <section id="tab-stock" class="tab-panel" style="display:none;">
+      <div class="card">
+        <h3>Vehicle Stock</h3>
+        <div class="form-row wrap">
+          <input type="text" id="stock-model" placeholder="Model (e.g. Zephyr 125)" />
+          <input type="text" id="stock-variant" placeholder="Variant" />
+          <input type="text" id="stock-color" placeholder="Color" />
+          <input type="number" id="stock-price" placeholder="Price ₹" />
+          <input type="number" id="stock-gst" placeholder="GST %" value="28" />
+          <input type="number" id="stock-qty" placeholder="Qty" value="5" />
+          <button id="btn-add-stock">Add Vehicle</button>
+        </div>
+        <table id="stock-table">
+          <thead><tr><th>Model</th><th>Variant</th><th>Color</th><th>Price</th><th>GST%</th><th>Qty</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- CUSTOMERS -->
+    <section id="tab-customers" class="tab-panel" style="display:none;">
+      <div class="card">
+        <h3>Customers</h3>
+        <div class="form-row wrap">
+          <input type="text" id="cust-name" placeholder="Full name" />
+          <input type="text" id="cust-phone" placeholder="Phone" />
+          <input type="text" id="cust-address" placeholder="Address" />
+          <button id="btn-add-customer">Add Customer</button>
+        </div>
+        <table id="customers-table">
+          <thead><tr><th>Name</th><th>Phone</th><th>Address</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SALES REPORT -->
+    <section id="tab-report" class="tab-panel" style="display:none;">
+      <div class="card">
+        <h3>Sales Report</h3>
+        <div class="form-row">
+          <label>From</label><input type="date" id="rep-from" />
+          <label>To</label><input type="date" id="rep-to" />
+          <button id="btn-filter-report" class="secondary">Filter</button>
+          <button id="btn-clear-report" class="secondary">Clear</button>
+        </div>
+        <table id="report-table">
+          <thead><tr><th>Invoice #</th><th>Date</th><th>Customer</th><th>Items</th><th>Total</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <p><strong>Total Revenue (filtered): <span id="report-total">₹0</span></strong></p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- PRINTABLE INVOICE (hidden until generated / viewed) -->
+  <div id="print-invoice" class="print-only"></div>
+
+  <div class="app-footer no-print">
+    Demo project by <strong>Hassan Ansari</strong> ·
+    <a href="https://github.com/iam-hassan-ansari" target="_blank" rel="noopener">GitHub</a>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

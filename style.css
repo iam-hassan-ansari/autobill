@@ -1,0 +1,143 @@
+/* ===== Shared dark theme — reused across all Hassan Ansari demo projects ===== */
+:root {
+  --bg: #0b1220;
+  --surface: #121a2b;
+  --surface-2: #1a2438;
+  --text: #e6ebf5;
+  --muted: #93a0b8;
+  --primary: #3ba7ff;
+  --primary-dark: #2b86d1;
+  --accent: #22d3ee;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --border: #24304a;
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --mono: 'Consolas', 'Courier New', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  min-height: 100vh;
+}
+
+a { color: var(--primary); }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.topbar .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+.topbar .badge {
+  font-size: 11px; font-weight: 700; letter-spacing: .06em;
+  background: var(--warning); color: #1a1200; padding: 3px 8px; border-radius: 6px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+button, .btn {
+  font-family: var(--font);
+  background: var(--primary);
+  color: #071322;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .05s ease, background .15s ease;
+}
+button:hover, .btn:hover { background: var(--primary-dark); }
+button:active, .btn:active { transform: scale(.98); }
+button.secondary { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+button.danger { background: var(--danger); color: #fff; }
+
+input, select, textarea {
+  font-family: var(--font);
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+}
+input:focus, select:focus, textarea:focus { outline: 2px solid var(--primary); }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; font-size: 14px; }
+th { color: var(--muted); font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: .04em; }
+
+.app-footer {
+  text-align: center;
+  padding: 18px;
+  color: var(--muted);
+  font-size: 13px;
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+.app-footer a { color: var(--accent); text-decoration: none; }
+.app-footer a:hover { text-decoration: underline; }
+
+.container { max-width: 1100px; margin: 0 auto; padding: 24px 18px; }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+}
+
+/* ===== AutoBill-specific styles ===== */
+.tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.tab-btn {
+  background: transparent; color: var(--muted); border: 1px solid transparent;
+  padding: 8px 14px; font-weight: 600; font-size: 14px;
+}
+.tab-btn:hover { color: var(--text); background: var(--surface-2); }
+.tab-btn.active { color: #071322; background: var(--primary); }
+
+.stat-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px;
+}
+.stat-label { color: var(--muted); font-size: 13px; margin-bottom: 6px; }
+.stat-value { font-size: 26px; font-weight: 700; color: var(--accent); }
+
+.form-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; }
+.form-row.wrap { flex-wrap: wrap; }
+.form-row label { color: var(--muted); font-size: 13px; min-width: 60px; }
+
+.invoice-totals { display: flex; justify-content: flex-end; margin: 16px 0; }
+.totals-box { min-width: 280px; background: var(--surface-2); border-radius: 10px; padding: 14px 18px; }
+.totals-box div { display: flex; justify-content: space-between; padding: 4px 0; font-size: 14px; }
+.totals-box .grand { border-top: 1px solid var(--border); margin-top: 6px; padding-top: 10px; font-weight: 700; font-size: 17px; color: var(--accent); }
+
+.muted { color: var(--muted); font-size: 13px; }
+
+/* Printable invoice — hidden on screen, shown only when printing an invoice */
+.print-only { display: none; }
+@media print {
+  body.printing-invoice > *:not(#print-invoice) { display: none !important; }
+  body.printing-invoice #print-invoice { display: block !important; }
+  #print-invoice { color: #000; font-family: var(--font); }
+  #print-invoice h2 { margin-bottom: 0; }
+  #print-invoice table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+  #print-invoice th, #print-invoice td { border: 1px solid #999; padding: 6px 8px; font-size: 13px; }
+}
+
+@media (max-width: 700px) {
+  .topbar { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
